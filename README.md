@@ -8,7 +8,7 @@ official Minecraft server.
 
 To run this code, you will first need to obtain Spigot, which can only be legally
 distributed in source form, so they have provided a very handy tool that sets everything
-up for you : http://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8-3.53745/ .
+up for you: http://www.spigotmc.org/threads/bukkit-craftbukkit-spigot-1-8-3.53745/ .
 
 Once the Spigot JAR is in your local Maven repository, it should be as simple
 as building this project:
@@ -17,7 +17,7 @@ as building this project:
 $ mvn verify
 ```
 
-Make sure you have a Redis server running :
+Make sure you have a Redis server running:
 
 ```bash
 $ echo 'save 300 1' > redis.conf
@@ -34,8 +34,11 @@ Loading libraries, please wait...
 …
 ```
 
+On the first launch, you will need to agree to the Minecraft EULA and restart
+the server. Just follow the instructions.
+
 After a while, the Minecraft server will start saving chunks to Redis. You can
-see those by asking Redis :
+see those by asking Redis:
 
 ```bash
 $ redis-cli keys '*'
@@ -43,6 +46,13 @@ world:0_0.chunk
 world:0_1.chunk
 …
 ```
+
+Control freaks will be happier monitoring writes to Redis as they happen:
+
+```bash
+$ redis-cli config set notify-keyspace-events EA && redis-cli --csv psubscribe '__key*__:*'
+```
+
 
 You can also try breaking a few blocks, stopping the Minecraft server and restarting
 it to see that your changes persisted. But of course, no `.mca` files were created.

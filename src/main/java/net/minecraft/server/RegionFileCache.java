@@ -97,7 +97,7 @@ public class RegionFileCache {
 	 * @return a {@link DataInputStream} over the chunk's bytes
 	 */
 	public static DataInputStream openChunkForReading(File worldDir, int chunkX, int chunkZ) {
-		logger.debug("reading " + worldDir.getName() + " at " + chunkX + "," + chunkZ);
+		logger.debug("reading {} at {},{}", worldDir.getName(), chunkX, chunkZ);
 
 		String key = chunkKey(worldDir, chunkX, chunkZ);
 
@@ -106,7 +106,7 @@ public class RegionFileCache {
 		if (bytes == null)
 			return null;
 
-		logger.debug(key + " : read " + bytes.length + " bytes");
+		logger.debug("{}: read {} bytes", key, bytes.length);
 
 		return new DataInputStream(new InflaterInputStream(new ByteArrayInputStream(bytes)));
 	}
@@ -127,7 +127,7 @@ public class RegionFileCache {
 	 * @return a {@link DataOutputStream} to the chunk's bytes
 	 */
 	public static DataOutputStream openChunkForWriting(File worldDir, int chunkX, int chunkZ) {
-		logger.debug("writing " + worldDir.getName() + " at " + chunkX + "," + chunkZ);
+		logger.debug("writing {} at {},{}", worldDir.getName(), chunkX, chunkZ);
 
 		final String key = chunkKey(worldDir, chunkX, chunkZ);
 
@@ -135,7 +135,7 @@ public class RegionFileCache {
 			@Override
 			protected void store(byte[] buf) {
 				redisSet(key, buf);
-				logger.debug(key + " : wrote " + buf.length + " bytes");
+				logger.debug("{}: wrote {} bytes", key, buf.length);
 			}
 
 		}));
@@ -190,9 +190,7 @@ public class RegionFileCache {
 	 * @return a {@link String} that uniquely identifies a chunk.
 	 */
 	private static String chunkKey(File worldDir, int chunkX, int chunkZ) {
-		String fileName = String.format("%s:%d_%d.chunk", worldDir.getName(), chunkX, chunkZ);
-
-		return fileName;
+		return String.format("%s:%d_%d.chunk", worldDir.getName(), chunkX, chunkZ);
 	}
 
 	/**
