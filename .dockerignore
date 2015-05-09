@@ -1,0 +1,6 @@
+.git/
+target/
+minecraft-data/
+Dockerfile
+.dockerignore
+.gitignore
