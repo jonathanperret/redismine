@@ -1,6 +1,6 @@
 A Thursday hack to store Minecraft
 [chunks](http://minecraft.gamepedia.com/Chunks) in [Redis](http://redis.io/) instead
-of using the [Anvil](https://mojang.com/2012/02/new-minecraft-map-format-anvil/) file
+of using the [Anvil](https://web.archive.org/web/20180929232134/https://mojang.com/2012/02/new-minecraft-map-format-anvil/) file
 format.
 
 This is based on [Spigot](http://spigotmc.org/) 1.8.3, a mod-friendly "fork" of the
